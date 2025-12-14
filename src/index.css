@@ -2,95 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Museum Color Palette */
+    --background: 0 0% 5%; /* #0d0d0d - Deep black lacquer */
+    --foreground: 42 33% 93%; /* #f5efe6 - Warm cream */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 8%;
+    --card-foreground: 42 33% 93%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 42 33% 93%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Vermilion accent */
+    --primary: 6 71% 45%; /* #c23322 */
+    --primary-foreground: 42 33% 93%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 42 33% 93%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 42 15% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 6 71% 45%;
+    --accent-foreground: 42 33% 93%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 42 33% 93%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 18%;
+    --input: 0 0% 15%;
+    --ring: 6 71% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Custom museum tokens */
+    --vermilion: 6 71% 45%;
+    --vermilion-dark: 6 71% 35%;
+    --lacquer: 0 0% 5%;
+    --lacquer-light: 0 0% 10%;
+    --cream: 42 33% 93%;
+    --cream-muted: 42 20% 70%;
+    
+    /* Frame styling */
+    --frame-outer: 0 0% 3%;
+    --frame-inner: 6 71% 45%;
+    
+    /* Shadows */
+    --shadow-museum: 0 20px 60px -15px hsl(0 0% 0% / 0.8);
+    --shadow-door: 0 30px 80px -20px hsl(0 0% 0% / 0.9);
+    --shadow-frame: 0 8px 32px -8px hsl(0 0% 0% / 0.6);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
+    --background: 0 0% 5%;
+    --foreground: 42 33% 93%;
+    --card: 0 0% 8%;
+    --card-foreground: 42 33% 93%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 42 33% 93%;
+    --primary: 6 71% 45%;
+    --primary-foreground: 42 33% 93%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 42 33% 93%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 42 15% 60%;
+    --accent: 6 71% 45%;
+    --accent-foreground: 42 33% 93%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 42 33% 93%;
+    --border: 0 0% 18%;
+    --input: 0 0% 15%;
+    --ring: 6 71% 45%;
   }
 }
 
@@ -100,6 +83,87 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-serif antialiased;
+  }
+
+  /* Custom scrollbar for museum feel */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--lacquer));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--vermilion));
+  }
+}
+
+@layer utilities {
+  /* Museum-specific utilities */
+  .text-vermilion {
+    color: hsl(var(--vermilion));
+  }
+
+  .bg-lacquer {
+    background-color: hsl(var(--lacquer));
+  }
+
+  .bg-lacquer-light {
+    background-color: hsl(var(--lacquer-light));
+  }
+
+  .text-cream {
+    color: hsl(var(--cream));
+  }
+
+  .text-cream-muted {
+    color: hsl(var(--cream-muted));
+  }
+
+  .border-vermilion {
+    border-color: hsl(var(--vermilion));
+  }
+
+  .shadow-museum {
+    box-shadow: var(--shadow-museum);
+  }
+
+  .shadow-door {
+    box-shadow: var(--shadow-door);
+  }
+
+  .shadow-frame {
+    box-shadow: var(--shadow-frame);
+  }
+
+  /* Frame styling */
+  .photo-frame {
+    @apply relative p-2 bg-[hsl(var(--frame-outer))];
+    box-shadow: 
+      inset 0 2px 4px hsl(0 0% 0% / 0.3),
+      var(--shadow-frame);
+  }
+
+  .photo-frame::before {
+    content: '';
+    @apply absolute inset-1 pointer-events-none;
+    border: 2px solid hsl(var(--frame-inner));
+  }
+
+  /* Door hover effect */
+  .door-hover {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .door-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-door);
   }
 }
