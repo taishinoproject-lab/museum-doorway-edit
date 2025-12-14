@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Upload, Trash2, Plus, Image as ImageIcon } from 'lucide-react';
-import { useMuseumStore, type Exhibition, type ExhibitionType } from '@/lib/museumStore';
+import { X, Upload, Trash2, Plus } from 'lucide-react';
+import { useMuseumStore, type Exhibition, type ExhibitionType, type ExhibitItem } from '@/lib/museumStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,8 +15,23 @@ interface AdminModalProps {
 }
 
 export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
-  const { exhibitions, photos, addExhibition, updateExhibition, deleteExhibition, addPhotos, updatePhoto, deletePhoto } = useMuseumStore();
+  const { 
+    exhibitions, 
+    exhibitItems, 
+    photos, 
+    addExhibition, 
+    updateExhibition, 
+    deleteExhibition,
+    addExhibitItem,
+    updateExhibitItem,
+    deleteExhibitItem,
+    addPhotos, 
+    updatePhoto, 
+    deletePhoto 
+  } = useMuseumStore();
+  
   const [selectedExhibitionId, setSelectedExhibitionId] = useState<string>(exhibitions[0]?.id || '');
+  const [selectedItemId, setSelectedItemId] = useState<string>('');
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -24,6 +39,13 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
     name: '',
     description: '',
     type: '常設展',
+  });
+
+  const [newItem, setNewItem] = useState<{ name: string; description: string; episode: string; coverImage: string }>({
+    name: '',
+    description: '',
+    episode: '',
+    coverImage: '',
   });
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -42,7 +64,7 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
     
     const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
     handleFiles(files);
-  }, [selectedExhibitionId]);
+  }, [selectedItemId]);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
@@ -53,15 +75,15 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
   };
 
   const handleFiles = (files: File[]) => {
-    if (!selectedExhibitionId) {
-      toast.error('展示室を選択してください');
+    if (!selectedItemId) {
+      toast.error('展示アイテムを選択してください');
       return;
     }
 
     if (files.length === 0) return;
 
     const newPhotos = files.map(file => ({
-      exhibitionId: selectedExhibitionId,
+      exhibitItemId: selectedItemId,
       imageSrc: URL.createObjectURL(file),
       caption: file.name.replace(/\.[^/.]+$/, ''),
     }));
@@ -80,7 +102,28 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
     toast.success('展示室を追加しました');
   };
 
-  const exhibitionPhotos = photos.filter(p => p.exhibitionId === selectedExhibitionId).sort((a, b) => a.order - b.order);
+  const handleAddItem = () => {
+    if (!selectedExhibitionId) {
+      toast.error('展示室を選択してください');
+      return;
+    }
+    if (!newItem.name.trim()) {
+      toast.error('アイテム名を入力してください');
+      return;
+    }
+    addExhibitItem({
+      exhibitionId: selectedExhibitionId,
+      name: newItem.name,
+      description: newItem.description,
+      episode: newItem.episode,
+      coverImage: newItem.coverImage || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop',
+    });
+    setNewItem({ name: '', description: '', episode: '', coverImage: '' });
+    toast.success('アイテムを追加しました');
+  };
+
+  const exhibitionItems = exhibitItems.filter(item => item.exhibitionId === selectedExhibitionId).sort((a, b) => a.order - b.order);
+  const itemPhotos = photos.filter(p => p.exhibitItemId === selectedItemId).sort((a, b) => a.order - b.order);
 
   return (
     <AnimatePresence>
@@ -113,6 +156,7 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
               <Tabs defaultValue="exhibitions" className="p-6">
                 <TabsList className="mb-6">
                   <TabsTrigger value="exhibitions">展示室</TabsTrigger>
+                  <TabsTrigger value="items">アイテム</TabsTrigger>
                   <TabsTrigger value="photos">写真</TabsTrigger>
                 </TabsList>
 
@@ -159,8 +203,8 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
                   </div>
                 </TabsContent>
 
-                {/* Photos Tab */}
-                <TabsContent value="photos" className="space-y-6">
+                {/* Items Tab */}
+                <TabsContent value="items" className="space-y-6">
                   {/* Exhibition selector */}
                   <Select value={selectedExhibitionId} onValueChange={setSelectedExhibitionId}>
                     <SelectTrigger className="w-full md:w-64">
@@ -174,6 +218,77 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
                       ))}
                     </SelectContent>
                   </Select>
+
+                  {/* Add new item */}
+                  <div className="p-4 bg-secondary/50 rounded-lg space-y-4">
+                    <h3 className="text-sm font-medium text-muted-foreground">新規アイテム</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Input
+                        placeholder="アイテム名（例：フランスパン）"
+                        value={newItem.name}
+                        onChange={(e) => setNewItem(prev => ({ ...prev, name: e.target.value }))}
+                      />
+                      <Input
+                        placeholder="短い説明"
+                        value={newItem.description}
+                        onChange={(e) => setNewItem(prev => ({ ...prev, description: e.target.value }))}
+                      />
+                    </div>
+                    <Textarea
+                      placeholder="エピソード（詳しい説明）"
+                      value={newItem.episode}
+                      onChange={(e) => setNewItem(prev => ({ ...prev, episode: e.target.value }))}
+                      rows={3}
+                    />
+                    <Input
+                      placeholder="カバー画像URL（空欄可）"
+                      value={newItem.coverImage}
+                      onChange={(e) => setNewItem(prev => ({ ...prev, coverImage: e.target.value }))}
+                    />
+                    <Button onClick={handleAddItem} className="w-full md:w-auto">
+                      <Plus className="w-4 h-4 mr-2" />
+                      追加
+                    </Button>
+                  </div>
+
+                  {/* Items list */}
+                  <div className="space-y-3">
+                    {exhibitionItems.map((item) => (
+                      <ItemEditor key={item.id} item={item} onUpdate={updateExhibitItem} onDelete={deleteExhibitItem} />
+                    ))}
+                  </div>
+                </TabsContent>
+
+                {/* Photos Tab */}
+                <TabsContent value="photos" className="space-y-6">
+                  {/* Exhibition selector */}
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <Select value={selectedExhibitionId} onValueChange={(v) => { setSelectedExhibitionId(v); setSelectedItemId(''); }}>
+                      <SelectTrigger className="w-full md:w-64">
+                        <SelectValue placeholder="展示室を選択" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {exhibitions.map((ex) => (
+                          <SelectItem key={ex.id} value={ex.id}>
+                            {ex.type}: {ex.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <Select value={selectedItemId} onValueChange={setSelectedItemId}>
+                      <SelectTrigger className="w-full md:w-64">
+                        <SelectValue placeholder="アイテムを選択" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {exhibitionItems.map((item) => (
+                          <SelectItem key={item.id} value={item.id}>
+                            {item.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
                   {/* Drop zone */}
                   <div
@@ -204,7 +319,7 @@ export const AdminModal = ({ isOpen, onClose }: AdminModalProps) => {
 
                   {/* Photo grid */}
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {exhibitionPhotos.map((photo) => (
+                    {itemPhotos.map((photo) => (
                       <PhotoEditor key={photo.id} photo={photo} onUpdate={updatePhoto} onDelete={deletePhoto} />
                     ))}
                   </div>
@@ -278,15 +393,68 @@ const ExhibitionEditor = ({ exhibition, onUpdate, onDelete }: ExhibitionEditorPr
   );
 };
 
+// Item editor component
+interface ItemEditorProps {
+  item: ExhibitItem;
+  onUpdate: (id: string, updates: Partial<ExhibitItem>) => void;
+  onDelete: (id: string) => void;
+}
+
+const ItemEditor = ({ item, onUpdate, onDelete }: ItemEditorProps) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState(item.name);
+  const [description, setDescription] = useState(item.description);
+  const [episode, setEpisode] = useState(item.episode);
+
+  const handleSave = () => {
+    onUpdate(item.id, { name, description, episode });
+    setIsEditing(false);
+    toast.success('保存しました');
+  };
+
+  if (isEditing) {
+    return (
+      <div className="p-4 bg-secondary/30 rounded-lg space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="アイテム名" />
+          <Input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="短い説明" />
+        </div>
+        <Textarea value={episode} onChange={(e) => setEpisode(e.target.value)} placeholder="エピソード" rows={3} />
+        <div className="flex gap-2">
+          <Button size="sm" onClick={handleSave}>保存</Button>
+          <Button size="sm" variant="outline" onClick={() => setIsEditing(false)}>キャンセル</Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-start justify-between p-4 bg-secondary/30 rounded-lg group gap-4">
+      <div className="flex gap-4 flex-1 min-w-0">
+        <img src={item.coverImage} alt={item.name} className="w-16 h-16 rounded object-cover flex-shrink-0" />
+        <div className="min-w-0">
+          <span className="font-medium block">{item.name}</span>
+          <p className="text-sm text-muted-foreground truncate">{item.description}</p>
+        </div>
+      </div>
+      <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+        <Button size="sm" variant="outline" onClick={() => setIsEditing(true)}>編集</Button>
+        <Button size="sm" variant="destructive" onClick={() => { onDelete(item.id); toast.success('削除しました'); }}>
+          <Trash2 className="w-4 h-4" />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 // Photo editor component
 interface PhotoEditorProps {
-  photo: { id: string; imageSrc: string; caption: string; exhibitionId: string };
-  onUpdate: (id: string, updates: { caption?: string; exhibitionId?: string }) => void;
+  photo: { id: string; imageSrc: string; caption: string; exhibitItemId: string };
+  onUpdate: (id: string, updates: { caption?: string; exhibitItemId?: string }) => void;
   onDelete: (id: string) => void;
 }
 
 const PhotoEditor = ({ photo, onUpdate, onDelete }: PhotoEditorProps) => {
-  const { exhibitions } = useMuseumStore();
   const [caption, setCaption] = useState(photo.caption);
   const [isEditing, setIsEditing] = useState(false);
 

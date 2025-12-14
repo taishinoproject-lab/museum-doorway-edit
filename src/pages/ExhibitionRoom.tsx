@@ -1,16 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { PhotoFrame } from '@/components/PhotoFrame';
+import { ExhibitItemCard } from '@/components/ExhibitItemCard';
 import { MuseumHeader } from '@/components/MuseumHeader';
 import { useMuseumStore } from '@/lib/museumStore';
 
 const ExhibitionRoom = () => {
   const { id } = useParams<{ id: string }>();
-  const { exhibitions, photos } = useMuseumStore();
+  const { exhibitions, exhibitItems } = useMuseumStore();
   
   const exhibition = exhibitions.find((ex) => ex.id === id);
-  const exhibitionPhotos = photos
-    .filter((p) => p.exhibitionId === id)
+  const items = exhibitItems
+    .filter((item) => item.exhibitionId === id)
     .sort((a, b) => a.order - b.order);
 
   if (!exhibition) {
@@ -62,14 +62,13 @@ const ExhibitionRoom = () => {
           </p>
         </motion.div>
 
-        {/* Photo gallery */}
-        {exhibitionPhotos.length > 0 ? (
+        {/* Exhibit items gallery */}
+        {items.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {exhibitionPhotos.map((photo, index) => (
-              <PhotoFrame
-                key={photo.id}
-                imageSrc={photo.imageSrc}
-                caption={photo.caption}
+            {items.map((item, index) => (
+              <ExhibitItemCard
+                key={item.id}
+                item={item}
                 index={index}
               />
             ))}
@@ -80,12 +79,12 @@ const ExhibitionRoom = () => {
             animate={{ opacity: 1 }}
             className="text-center py-20 text-muted-foreground"
           >
-            <p>この展示にはまだ写真がありません</p>
+            <p>この展示にはまだアイテムがありません</p>
           </motion.div>
         )}
 
-        {/* Gallery count */}
-        {exhibitionPhotos.length > 0 && (
+        {/* Items count */}
+        {items.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -93,7 +92,7 @@ const ExhibitionRoom = () => {
             className="text-center mt-16"
           >
             <p className="text-sm text-muted-foreground">
-              {exhibitionPhotos.length} 点の展示
+              {items.length} 点の展示
             </p>
           </motion.div>
         )}
