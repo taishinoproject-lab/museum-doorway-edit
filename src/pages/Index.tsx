@@ -81,7 +81,7 @@ const Index = () => {
         className="py-6 text-center select-none cursor-default"
       >
         <p className="text-xs text-muted-foreground/50 tracking-wide">
-          © 2024 わたし博物館
+          © 2025 わたし博物館
         </p>
       </footer>
 
