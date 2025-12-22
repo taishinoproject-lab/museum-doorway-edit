@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ExhibitionCard } from '@/components/ExhibitionCard';
 import { MuseumHeader } from '@/components/MuseumHeader';
@@ -27,6 +27,15 @@ const ExhibitionList = () => {
 
       <main className="max-w-3xl mx-auto px-6 py-24">
         {/* Header */}
+        <div className="mb-10">
+          <Link
+            to="/"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            ← 正面入口へ戻る
+          </Link>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
