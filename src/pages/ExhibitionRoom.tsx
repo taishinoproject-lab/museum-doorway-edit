@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ExhibitItemCard } from '@/components/ExhibitItemCard';
 import { MuseumHeader } from '@/components/MuseumHeader';
@@ -26,6 +26,19 @@ const ExhibitionRoom = () => {
       <MuseumHeader />
 
       <main className="max-w-6xl mx-auto px-6 py-24">
+        <div className="mb-10 flex items-center justify-between gap-4">
+          <Link
+            to={`/exhibitions/${exhibition.type}`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            ← {exhibition.type}一覧へ戻る
+          </Link>
+
+          <p className="text-sm text-muted-foreground">
+            {items.length} 点の展示
+          </p>
+        </div>
+
         {/* Exhibition header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,18 +97,6 @@ const ExhibitionRoom = () => {
         )}
 
         {/* Items count */}
-        {items.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-center mt-16"
-          >
-            <p className="text-sm text-muted-foreground">
-              {items.length} 点の展示
-            </p>
-          </motion.div>
-        )}
       </main>
     </div>
   );

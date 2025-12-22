@@ -3,9 +3,16 @@ import { motion } from 'framer-motion';
 import { ExhibitionCard } from '@/components/ExhibitionCard';
 import { MuseumHeader } from '@/components/MuseumHeader';
 import { useMuseumStore, type ExhibitionType } from '@/lib/museumStore';
+import NotFound from './NotFound';
 
 const ExhibitionList = () => {
   const { type } = useParams<{ type: ExhibitionType }>();
+  const allowedTypes = ['常設展', '企画展'] as const;
+
+  if (!type || !allowedTypes.includes(type)) {
+    return <NotFound />;
+  }
+
   const { exhibitions } = useMuseumStore();
   
   const filteredExhibitions = exhibitions

@@ -37,7 +37,7 @@ const ExhibitItemDetail = () => {
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm">{exhibition?.name}に戻る</span>
+          <span className="text-sm"> {exhibition?.name ?? '部屋'}へ戻る</span>
         </motion.button>
 
         {/* Item header */}
@@ -46,7 +46,12 @@ const ExhibitItemDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
-        >
+        > {exhibition && (
+            <p className="text-sm text-muted-foreground tracking-wider mb-3">
+              {exhibition.type} / {exhibition.name}
+            </p>
+          )}
+        
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4">
             {item.name}
           </h1>
@@ -78,7 +83,7 @@ const ExhibitItemDetail = () => {
             <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary" />
             <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary" />
 
-            <h2 className="text-sm tracking-wider text-primary mb-4">EPISODE</h2>
+            <h2 className="text-sm tracking-wider text-primary mb-4">エピソード</h2>
             <p className="text-foreground/90 leading-relaxed text-lg">
               {item.episode}
             </p>
@@ -92,7 +97,7 @@ const ExhibitItemDetail = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="text-sm tracking-wider text-primary mb-8 text-center">GALLERY</h2>
+            <h2 className="text-sm tracking-wider text-primary mb-8 text-center">ギャラリー</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               {itemPhotos.map((photo, index) => (
                 <PhotoFrame
