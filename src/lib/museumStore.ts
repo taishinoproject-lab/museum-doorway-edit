@@ -55,22 +55,22 @@ const initialExhibitions: Exhibition[] = [
   {
     id: 'ex1',
     type: '常設展',
-    name: '記憶の回廊',
-    description: '人生の節目となった瞬間を辿る常設展示',
+    name: '好きなモノ展',
+    description: '内藤の好きなモノをたどる常設展示',
     order: 0,
   },
   {
     id: 'ex2',
     type: '常設展',
-    name: '創造の軌跡',
-    description: '制作活動とプロジェクトの記録',
+    name: '好きなコト展',
+    description: '内藤の好きなコトをたどる常設展示',
     order: 1,
   },
   {
     id: 'ex3',
     type: '企画展',
-    name: '光と影',
-    description: '特別企画：写真作品展',
+    name: '今ハマっていること展',
+    description: '内藤が今ハマっていることを覗く企画展',
     order: 0,
   },
 ];
@@ -97,10 +97,10 @@ const initialExhibitItems: ExhibitItem[] = [
   {
     id: 'item3',
     exhibitionId: 'ex1',
-    name: '古い写真機',
-    description: '写真を始めるきっかけ',
-    episode: '父から譲り受けたフィルムカメラ。デジタル全盛の時代に、一枚一枚丁寧に撮る楽しさを教えてくれた。シャッター音を聞くたびに、新しい物語が始まる気がした。',
-    coverImage: 'https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=800&h=600&fit=crop',
+    name: '水墨画',
+    description: '墨と水のみで表現する空白の美学',
+    episode: '内藤が水墨画に初めて触れたのは中学生に読んだ「線は僕を描く」という小説だった。その後、毎年年賀状に自作の水墨画を描くようになった。メルカリで購入した硯がお気に入りで、墨をするときの音と匂いがたまらない。',
+    coverImage: 'https://cocolomy.com/wp-content/uploads/2025/11/040c81722483394bad967e111bb8e48f-392x560.jpg',
     order: 2,
   },
   {
@@ -155,8 +155,8 @@ const initialPhotos: Photo[] = [
   {
     id: 'ph5',
     exhibitItemId: 'item3',
-    imageSrc: 'https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=800&h=600&fit=crop',
-    caption: '父のカメラ',
+    imageSrc: 'https://cocolomy.com/wp-content/uploads/2025/11/2491bebb121c4909216bd4c22faefd7a-420x560.jpg',
+    caption: 'メルカリで買ったお気に入りの硯',
     order: 0,
   },
   {
