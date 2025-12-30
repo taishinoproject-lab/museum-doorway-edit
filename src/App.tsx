@@ -16,13 +16,12 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/museum-doorway-edit">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/exhibitions/:type" element={<ExhibitionList />} />
           <Route path="/room/:id" element={<ExhibitionRoom />} />
           <Route path="/item/:id" element={<ExhibitItemDetail />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
