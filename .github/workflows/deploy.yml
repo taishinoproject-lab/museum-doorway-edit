@@ -27,6 +27,16 @@ jobs:
       - run: npm ci
       - run: npm run build
 
+      - run: echo "==== vite config ===="
+      - run: cat vite.config.ts || true
+      - run: echo "==== package.json scripts ===="
+      - run: cat package.json | sed -n '1,80p'
+      - run: echo "==== dist/index.html (head) ===="
+      - run: cat dist/index.html | sed -n '1,80p'
+      - run: echo "==== dist/assets ===="
+      - run: ls -la dist/assets || true
+
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
