@@ -53,11 +53,29 @@
     {
       "id": "item4",
       "exhibitionId": "ex2",
-      "name": "プログラミング",
-      "description": "コードで世界を創る",
-      "episode": "初めて書いたHello Worldから始まった旅。画面に文字が表示された瞬間の感動は忘れられない。今では複雑なシステムを構築できるようになったが、あの初心は忘れずにいたい。",
-      "coverImage": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
+      "name": "登山・キャンプ",
+      "description": "里山が特に好きで、頂上より道中が好き",
+      "episode": "幼少期からよく山に登った。秋の山が特に好きで、少し甘い落ち葉の匂いがたまらない。",
+      "coverImage": "/images/tozann(1).jpg",
       "order": 0
+    },
+    {
+      "id": "item6",
+      "exhibitionId": "ex2",
+      "name": "読書",
+      "description": "小学校からミステリが好きで、今は古風な作品も好き",
+      "episode": "中学生では図書委員長を務め、小中学校どちらの司書の先生とも友情を深めた。電車の中で本を読むのが習慣。",
+      "coverImage": "/images/読書.png",
+      "order": 1
+    },
+    {
+      "id": "item7",
+      "exhibitionId": "ex2",
+      "name": "旅行",
+      "description": "文化財や建築を巡るのが好き",
+      "episode": "高校受験後、すぐに京都へ日本刀巡りの一人旅に行った。それ以来、大型の休日では新しい刺激を求めて彷徨っている。",
+      "coverImage": "/images/桂離宮.jpg",
+      "order": 2
     },
     {
       "id": "item5",
@@ -108,16 +126,51 @@
     {
       "id": "ph6",
       "exhibitItemId": "item4",
-      "imageSrc": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
-      "caption": "デジタルの世界",
+      "imageSrc": "/images/tozann(1).jpg",
+      "caption": "地元の滝",
       "order": 0
     },
     {
       "id": "ph7",
       "exhibitItemId": "item4",
-      "imageSrc": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop",
-      "caption": "技術と芸術の融合",
+      "imageSrc": "/images/登山（2）.JPG",
+      "caption": "友達と登った山",
       "order": 1
+    },
+    {
+      "id": "ph10",
+      "exhibitItemId": "item4",
+      "imageSrc": "/images/キャンプ.png",
+      "caption": "ソロキャンもたまにする",
+      "order": 2
+    },
+    {
+      "id": "ph11",
+      "exhibitItemId": "item6",
+      "imageSrc": "/images/読書.png",
+      "caption": "京都旅行に行く電車の中で",
+      "order": 0
+    },
+    {
+      "id": "ph12",
+      "exhibitItemId": "item7",
+      "imageSrc": "/images/桂離宮.jpg",
+      "caption": "ブルーノ・タウトに影響されて",
+      "order": 0
+    },
+    {
+      "id": "ph13",
+      "exhibitItemId": "item7",
+      "imageSrc": "/images/ベトナム.png",
+      "caption": "ベトナム",
+      "order": 1
+    },
+    {
+      "id": "ph14",
+      "exhibitItemId": "item7",
+      "imageSrc": "/images/台湾.png",
+      "caption": "台湾",
+      "order": 2
     },
     {
       "id": "ph8",
