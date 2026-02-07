@@ -60,7 +60,7 @@ const ExhibitionList = () => {
           <p className="text-muted-foreground mt-6">
             {isPermanent
               ? '人生の節目となった記憶や活動を常時展示しています。'
-              : '期間限定の特別企画をお楽しみください。'}
+              : '企画展はただいま準備中です。公開まで今しばらくお待ちください。'}
           </p>
         </motion.div>
 

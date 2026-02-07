@@ -10,10 +10,17 @@ interface ExhibitionCardProps {
 
 export const ExhibitionCard = ({ exhibition, index }: ExhibitionCardProps) => {
   const navigate = useNavigate();
+  const isPreparing = exhibition.type === '企画展';
 
   return (
     <motion.button
-      onClick={() => navigate(`/room/${exhibition.id}`)}
+      onClick={() => {
+        if (!isPreparing) {
+          navigate(`/room/${exhibition.id}`);
+        }
+      }}
+      disabled={isPreparing}
+      aria-disabled={isPreparing}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ 
@@ -21,8 +28,12 @@ export const ExhibitionCard = ({ exhibition, index }: ExhibitionCardProps) => {
         delay: index * 0.1,
         ease: [0.22, 1, 0.36, 1]
       }}
-      whileHover={{ x: 8 }}
-      className="group w-full text-left p-6 bg-card border border-border rounded hover:border-primary/40 transition-colors duration-300"
+      whileHover={isPreparing ? undefined : { x: 8 }}
+      className={`group w-full text-left p-6 bg-card border border-border rounded transition-colors duration-300 ${
+        isPreparing
+          ? 'cursor-not-allowed opacity-70'
+          : 'hover:border-primary/40'
+      }`}
     >
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
@@ -40,14 +51,24 @@ export const ExhibitionCard = ({ exhibition, index }: ExhibitionCardProps) => {
           <p className="text-sm text-muted-foreground line-clamp-2">
             {exhibition.description}
           </p>
+
+          {isPreparing && (
+            <p className="mt-3 text-xs text-muted-foreground">
+              ただいま準備中のため、閲覧できません。準備が整い次第公開します。
+            </p>
+          )}
         </div>
         
         {/* Arrow */}
-        <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors ml-4 flex-shrink-0" />
+        <ChevronRight className="w-5 h-5 text-muted-foreground transition-colors ml-4 flex-shrink-0 group-hover:text-primary" />
       </div>
       
       {/* Bottom accent line */}
-      <div className="mt-4 h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div
+        className={`mt-4 h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent transition-opacity ${
+          isPreparing ? 'opacity-40' : 'opacity-0 group-hover:opacity-100'
+        }`}
+      />
     </motion.button>
   );
 };
