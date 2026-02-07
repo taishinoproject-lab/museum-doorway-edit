@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { resolveAssetUrl } from '@/lib/assets';
 
 interface PhotoFrameProps {
   imageSrc: string;
@@ -36,7 +37,7 @@ export const PhotoFrame = ({ imageSrc, caption, index, onClick }: PhotoFrameProp
               <div className="absolute inset-0 animate-pulse bg-muted" />
             )}
             <img
-              src={imageSrc}
+              src={resolveAssetUrl(imageSrc)}
               alt={caption}
               onLoad={() => setIsLoaded(true)}
               className={`w-full h-full object-cover transition-all duration-500 ${

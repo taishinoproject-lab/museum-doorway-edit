@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Upload, Trash2, Plus } from 'lucide-react';
 import { useMuseumStore, type Exhibition, type ExhibitionType, type ExhibitItem } from '@/lib/museumStore';
+import { resolveAssetUrl } from '@/lib/assets';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -431,7 +432,7 @@ const ItemEditor = ({ item, onUpdate, onDelete }: ItemEditorProps) => {
   return (
     <div className="flex items-start justify-between p-4 bg-secondary/30 rounded-lg group gap-4">
       <div className="flex gap-4 flex-1 min-w-0">
-        <img src={item.coverImage} alt={item.name} className="w-16 h-16 rounded object-cover flex-shrink-0" />
+        <img src={resolveAssetUrl(item.coverImage)} alt={item.name} className="w-16 h-16 rounded object-cover flex-shrink-0" />
         <div className="min-w-0">
           <span className="font-medium block">{item.name}</span>
           <p className="text-sm text-muted-foreground truncate">{item.description}</p>
@@ -467,7 +468,7 @@ const PhotoEditor = ({ photo, onUpdate, onDelete }: PhotoEditorProps) => {
   return (
     <div className="group relative">
       <div className="aspect-square rounded overflow-hidden bg-muted">
-        <img src={photo.imageSrc} alt={photo.caption} className="w-full h-full object-cover" />
+        <img src={resolveAssetUrl(photo.imageSrc)} alt={photo.caption} className="w-full h-full object-cover" />
       </div>
       
       {/* Overlay on hover */}
