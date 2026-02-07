@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import type { ExhibitItem } from '@/lib/museumStore';
+import { resolveAssetUrl } from '@/lib/assets';
 
 interface ExhibitItemCardProps {
   item: ExhibitItem;
@@ -32,7 +33,7 @@ export const ExhibitItemCard = ({ item, index }: ExhibitItemCardProps) => {
           transition={{ duration: 0.4 }}
         >
           <img
-            src={item.coverImage}
+            src={resolveAssetUrl(item.coverImage)}
             alt={item.name}
             className="w-full h-full object-cover"
           />
