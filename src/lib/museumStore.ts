@@ -9,6 +9,7 @@ export interface Exhibition {
   type: ExhibitionType;
   name: string;
   description: string;
+  isPublished?: boolean;
   order: number;
 }
 
