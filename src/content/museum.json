@@ -74,7 +74,7 @@
       "name": "旅行",
       "description": "文化財や建築を巡るのが好き",
       "episode": "高校受験後、すぐに京都へ日本刀巡りの一人旅に行った。それ以来、大型の休日では新しい刺激を求めて彷徨っている。",
-      "coverImage": "/images/桂離宮.jpg",
+      "coverImage": "https://assets.st-note.com/production/uploads/images/141937974/rectangle_large_type_2_5b1926801327a05af039f7e3df5f0b2b.jpeg?width=1280",
       "order": 2
     },
     {
@@ -154,7 +154,7 @@
     {
       "id": "ph12",
       "exhibitItemId": "item7",
-      "imageSrc": "/images/桂離宮.jpg",
+      "imageSrc": "https://assets.st-note.com/production/uploads/images/141937974/rectangle_large_type_2_5b1926801327a05af039f7e3df5f0b2b.jpeg?width=1280",
       "caption": "ブルーノ・タウトに影響されて",
       "order": 0
     },
