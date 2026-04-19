@@ -19,6 +19,7 @@
       "type": "企画展",
       "name": "今ハマっていること展",
       "description": "内藤が今ハマっていることを覗く企画展",
+      "isPublished": true,
       "order": 0
     }
   ],

@@ -18,6 +18,9 @@ const ExhibitionList = () => {
   const filteredExhibitions = exhibitions
     .filter((ex) => ex.type === type)
     .sort((a, b) => a.order - b.order);
+  const publishedExhibitions = filteredExhibitions.filter(
+    (exhibition) => exhibition.isPublished !== false
+  );
 
   const isPermanent = type === '常設展';
 
@@ -60,7 +63,9 @@ const ExhibitionList = () => {
           <p className="text-muted-foreground mt-6">
             {isPermanent
               ? '人生の節目となった記憶や活動を常時展示しています。'
-              : '企画展はただいま準備中です。公開まで今しばらくお待ちください。'}
+              : publishedExhibitions.length > 0
+                ? '期間限定で公開されるテーマ展示です。気になる展示室へお進みください。'
+                : '企画展はただいま準備中です。公開まで今しばらくお待ちください。'}
           </p>
         </motion.div>
 

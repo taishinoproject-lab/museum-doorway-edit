@@ -10,7 +10,7 @@ interface ExhibitionCardProps {
 
 export const ExhibitionCard = ({ exhibition, index }: ExhibitionCardProps) => {
   const navigate = useNavigate();
-  const isPreparing = exhibition.type === '企画展';
+  const isPreparing = exhibition.isPublished === false;
 
   return (
     <motion.button
