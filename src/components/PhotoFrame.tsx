@@ -7,9 +7,10 @@ interface PhotoFrameProps {
   caption: string;
   index: number;
   onClick?: () => void;
+  linkUrl?: string;
 }
 
-export const PhotoFrame = ({ imageSrc, caption, index, onClick }: PhotoFrameProps) => {
+export const PhotoFrame = ({ imageSrc, caption, index, onClick, linkUrl }: PhotoFrameProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -57,6 +58,20 @@ export const PhotoFrame = ({ imageSrc, caption, index, onClick }: PhotoFrameProp
       >
         {caption}
       </motion.p>
+
+      {linkUrl && (
+        <div className="mt-3 flex justify-center">
+          <a
+            href={linkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs tracking-wider text-primary hover:text-primary/80 underline underline-offset-4"
+            onClick={(event) => event.stopPropagation()}
+          >
+            ゲームを開く
+          </a>
+        </div>
+      )}
     </motion.div>
   );
 };

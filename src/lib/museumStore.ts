@@ -27,6 +27,7 @@ export interface Photo {
   exhibitItemId: string;
   imageSrc: string;
   caption: string;
+  linkUrl?: string;
   order: number;
 }
 

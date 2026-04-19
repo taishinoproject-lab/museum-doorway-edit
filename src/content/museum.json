@@ -85,6 +85,15 @@
       "episode": "夜明け前から海岸で待ち続けた。寒さに震えながら待った甲斐があった。水平線から昇る太陽が海面を金色に染めた瞬間、すべての疲れが吹き飛んだ。",
       "coverImage": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop",
       "order": 0
+    },
+    {
+      "id": "item8",
+      "exhibitionId": "ex3",
+      "name": "バイブコーディングでストーリー作り",
+      "description": "バイブコーディングで作ったゲームを通して、世界観と体験を磨く挑戦",
+      "episode": "ストーリー一覧から、気になるゲームを選んで遊べます。世界観を崩さないよう、体験のテンポや言葉選びまで意識しながら作っています。",
+      "coverImage": "https://image.thum.io/get/width/1200/noanimate/https://taishinoproject-lab.github.io/trion-burst-arena/",
+      "order": 1
     }
   ],
   "photos": [
@@ -184,6 +193,22 @@
       "exhibitItemId": "item5",
       "imageSrc": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop",
       "caption": "霧の中の光",
+      "order": 1
+    },
+    {
+      "id": "ph15",
+      "exhibitItemId": "item8",
+      "imageSrc": "https://image.thum.io/get/width/1200/noanimate/https://taishinoproject-lab.github.io/trion-burst-arena/",
+      "caption": "TRION BURST ARENA（ワールドトリガーに着想を得たシューティングゲーム）",
+      "linkUrl": "https://taishinoproject-lab.github.io/trion-burst-arena/",
+      "order": 0
+    },
+    {
+      "id": "ph16",
+      "exhibitItemId": "item8",
+      "imageSrc": "https://image.thum.io/get/width/1200/noanimate/https://taishinoproject-lab.github.io/game-dev-journey/",
+      "caption": "鬼道タイピング（ブリーチの鬼道を覚えられるタイピングゲーム）",
+      "linkUrl": "https://taishinoproject-lab.github.io/game-dev-journey/",
       "order": 1
     }
   ]

@@ -15,6 +15,7 @@ const ExhibitItemDetail = () => {
     .filter((p) => p.exhibitItemId === id)
     .sort((a, b) => a.order - b.order);
   const exhibition = item ? exhibitions.find((e) => e.id === item.exhibitionId) : null;
+  const hasStoryLinks = itemPhotos.some((photo) => Boolean(photo.linkUrl));
 
   if (!item) {
     return (
@@ -97,7 +98,7 @@ const ExhibitItemDetail = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="text-sm tracking-wider text-primary mb-8 text-center">ギャラリー</h2>
+            <h2 className="text-sm tracking-wider text-primary mb-8 text-center">{hasStoryLinks ? "ストーリー一覧" : "ギャラリー"}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               {itemPhotos.map((photo, index) => (
                 <PhotoFrame
@@ -105,6 +106,7 @@ const ExhibitItemDetail = () => {
                   imageSrc={photo.imageSrc}
                   caption={photo.caption}
                   index={index}
+                  linkUrl={photo.linkUrl}
                 />
               ))}
             </div>
