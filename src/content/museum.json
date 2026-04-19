@@ -79,22 +79,13 @@
       "order": 2
     },
     {
-      "id": "item5",
-      "exhibitionId": "ex3",
-      "name": "朝焼けの海",
-      "description": "静寂の中の光",
-      "episode": "夜明け前から海岸で待ち続けた。寒さに震えながら待った甲斐があった。水平線から昇る太陽が海面を金色に染めた瞬間、すべての疲れが吹き飛んだ。",
-      "coverImage": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop",
-      "order": 0
-    },
-    {
       "id": "item8",
       "exhibitionId": "ex3",
-      "name": "バイブコーディングでストーリー作り",
-      "description": "バイブコーディングで作ったゲームを通して、世界観と体験を磨く挑戦",
-      "episode": "ストーリー一覧から、気になるゲームを選んで遊べます。世界観を崩さないよう、体験のテンポや言葉選びまで意識しながら作っています。",
+      "name": "バイブコーディングでクソゲー作り",
+      "description": "最近、バイブコーディングでクソゲーを作るのにハマっています笑",
+      "episode": "ここでは暇を持て余した内藤が作ったクソゲーが並んでいます。本当に暇な時に遊んでください笑",
       "coverImage": "https://image.thum.io/get/width/1200/noanimate/https://taishinoproject-lab.github.io/trion-burst-arena/",
-      "order": 1
+      "order": 0
     }
   ],
   "photos": [
@@ -181,20 +172,6 @@
       "imageSrc": "/images/台湾.png",
       "caption": "台湾",
       "order": 2
-    },
-    {
-      "id": "ph8",
-      "exhibitItemId": "item5",
-      "imageSrc": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop",
-      "caption": "波の記憶",
-      "order": 0
-    },
-    {
-      "id": "ph9",
-      "exhibitItemId": "item5",
-      "imageSrc": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop",
-      "caption": "霧の中の光",
-      "order": 1
     },
     {
       "id": "ph15",
